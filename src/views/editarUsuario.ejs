@@ -1,0 +1,138 @@
+<%- include('_header.ejs') %>
+
+  <div class="container">
+
+    <div>
+      <div class="my-3 text-center">
+        <h3>Editar Usuario</h3>
+      </div>
+
+
+      <form action="/editarUsuario/<%= usuario.id%>" method="POST" class="col-md-6 offset-md-3 p-4 mt-3">
+
+        <div class="form-group">
+          <div>
+            <label for="nombre">Nombre y apellido:</label>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" value="<%= usuario.nombre %>" name="nombre">
+            <input type="text" class="form-control" value="<%= usuario.apellido %>" name="apellido">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="email">Email:</label>
+          </div>
+          <input type="email" class="form-control" value="<%= usuario.email %>" name="email">
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="dni">DNI:</label>
+          </div>
+          <input type="text" class="form-control" value="<%= usuario.dni %>" name="dni" minlength="7" maxlength="8">
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="estado">Estado:</label>
+          </div>
+          <select name="estado" id="" class="form-control">
+            <% if( usuario.estado=='Habilitado' ) {%>
+              <option value="Habilitado" selected>Habilitado</option>
+              <option value="Deshabilitado">Deshabilitado</option>
+              <% } else {%>
+                <option value="Habilitado">Habilitado</option>
+                <option value="Deshabilitado" selected>Deshabilitado</option>
+                <% } %>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="empresa">Empresa:</label>
+          </div>
+          <select name="empresa" id="" class="form-control">
+            <option value="<%= usuario.empresa %>" selected>
+              <%= usuario.empresa %>
+            </option>
+            <option value="NCR Logistica">NCR Logistica</option>
+            <option value="NCR control tower">NCR Control Tower</option>
+            <option value="NCR Account Support">NCR Account Support</option>
+            <option value="DHL SC">DHL SC</option>
+            <option value="DHL Express">DHL Express</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="username">Username:</label>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control" value="<%= usuario.username %>" name="username">
+          </div>
+        </div>
+
+
+
+        <div class="form-group">
+          <div>
+            <label for="perfil">Perfil:</label>
+          </div>
+          <select name="perfil" class="form-control">
+            <option selected value="<%= usuario.perfil %>">
+              <%= usuario.perfil %>
+            </option>
+            <option value="Nivel 1">Nivel 1 (visualizar)</option>
+            <option value="Nivel 2">Nivel 2 (editar)</option>
+            <option value="Nivel 3">Nivel 3 (administrar)</option>
+
+          </select>
+        </div>
+
+
+        <!-- RESET DE CONTRASEÑA -->
+        <div class="form-group">
+          <div>
+            <label for="password" class="text-danger">RESET DE CONTRASEÑA</label>
+          </div>
+          <div class="input-group">
+            <input type="text" class="form-control readonly bg-danger text-ligth" value="Nueva contraseña:">
+            <input type="password" class="form-control" name="password" minlength="8">
+          </div>
+        </div>
+
+
+
+        <!-- botoner -->
+        <div class="text-center">
+          <input type="submit" class="btn btn-success" value="Guardar">
+          <a href="/usuarios" class="btn btn-outline-danger">X</a>
+        </div>
+
+
+      </form>
+    </div>
+
+
+    <script>
+      $(document).ready(() => {
+        $('input:first').focus();
+      });
+    </script>
+
+
+    <% if(message.length> 0 ) {%>
+      <div class="alert alert-warning alert-dismissible fade show col-md-4" role="alert">
+        <%= message %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <% } %>
+
+
+  </div>
+
+  <%- include('_footer.ejs') %>

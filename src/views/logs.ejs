@@ -1,0 +1,144 @@
+<%- include('_header.ejs') %>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <span>
+            <a class="navbar-brand" href="">
+                <img src="/img/logo2.png" alt="..." width="25px">
+                Operatoria Web</a>
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+                <% if( user.perfil==='Nivel 3' || user.perfil==='Nivel 2' ){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/home">Destinos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guiasDeRetorno">Guias de retorno</a>
+                    </li>
+
+                    <% } %>
+
+                        <% if( user.perfil=='Nivel 3' ) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/usuarios">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/habilitarDestino">Habilitar destino</a>
+                            </li>
+                            <li class="nav-item">
+                                <u><a class="nav-link active" href="#">Logs<span
+                                            class="sr-only">(current)</span></a></u>
+                            </li>
+                            <% } %>
+
+
+
+
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <span class="mx-3">
+                    <%= user.empresa %>
+                </span>
+                <span class="mx-3">@ <%= user.username %></span>
+                <a class="nav-link btn btn-danger" href="/salir">X</a>
+            </form>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+    <div class="">
+
+
+        <div class="row mx-2">
+            <!-- MENSAJES -->
+            <% if(message.length> 0 ) {%>
+                <div class="alert alert-warning alert-dismissible fade show mt-2 mb-0" role="alert">
+                    <%= message %>
+                        <div class="text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                </div>
+                <% } %>
+        </div>
+
+
+        <!-- BARRA BUSQUEDA -->
+        <!-- <div class="row mx-2">
+            <div class="input-group my-3 mx-auto">
+                <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..."
+                    aria-describedby="basic-addon2" id="buscar">
+            </div>
+        </div> -->
+
+        <div class="container">
+            <div class="m-2 mt-3">
+                <!-- TABLE -->
+                <table class="table table-hover" id="tablaLogs">
+                    <thead class="table-info">
+                        <th>FECHA</th>
+                        <th>EVENTO</th>
+                    </thead>
+                    <tbody>
+                        <% logs.forEach(e=> { %>
+                            <tr class="shadow-sm p-1">
+                                <td class="align-middle">
+                                    <div>
+                                        <div>
+                                            <%= e.fecha %>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="align-middle">
+                                    <%= e.comentario %>
+                                </td>
+                            </tr>
+                            <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+
+
+    <script>
+        $(document).ready(function () {
+            $('#tablaLogs').DataTable(
+                {
+                    language: {
+                        "lengthMenu": "Mostrar _MENU_ resultados",
+                        "info": "Mostrando _START_ a _END_ de _TOTAL_ resultados",
+                        "infoEmpty": "Mostrando 0 a 0 de 0 resultados",
+                        "search": "Buscar:",
+                        "zeroRecords": "Sin resultados",
+                        "paginate": {
+                            "first": "Primero",
+                            "last": "Ultimo",
+                            "next": "Sig.",
+                            "previous": "Prev."
+                        },
+                    }
+                }
+            );
+        });
+    </script>
+
+    <%- include('_footer.ejs') %>

@@ -1,0 +1,58 @@
+<%- include('_header.ejs') %>
+
+  <div class="bg-secondary y w-100 m-0" style="position: absolute; top: 0; bottom: 0;">
+
+    <div class="container py-5">
+
+
+      <!-- <div class="my-3 text-center">
+        <h2 class="text-ligth">Operatoria Web NCR</h2> -->
+    </div>
+
+    <div class="col col-md-4 offset-md-4">
+      <div class="card">
+        <div class="card-body">
+
+          <h2 class="card-title text-center">
+            <img src="/img/logo.png" alt="..." class="w-25">
+            Operatoria Web NCR
+          </h2>
+          <hr>
+
+          <form action="/login" method="POST" class="text-center">
+
+            <div class="form-group">
+              <input type="text" name="username" placeholder="Usuario" class="form-control">
+            </div>
+
+            <div class="form-group">
+              <input type="password" name="password" placeholder="Contraseña" class="form-control">
+            </div>
+
+            <% if(message.length> 0 ) {%>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <%= message %>
+                  <div class="text-center">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+              </div>
+              <% } %>
+
+                <!-- botonera -->
+                <div class="form-group">
+                  <input type="submit" value="Iniciar sesion" class="btn btn-success">
+                  <!-- <a href="/register" class="btn btn-info">Registro</a> -->
+                </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  </div>
+
+  <%- include('_footer.ejs') %>

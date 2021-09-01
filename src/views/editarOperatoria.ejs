@@ -1,0 +1,280 @@
+<%- include('_header.ejs') %>
+
+
+  <div class="container">
+    <div class="row justify-content-md-center mt-2">
+      <h1>Editar destino</h1>
+    </div>
+
+
+
+    <div>
+      <form action="/editarOperatoria/<%= destino.id %>" method="POST" class="col-md-8 offset-md-2 p-4 mt-3">
+
+
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="provincia">Provincia</label>
+            <% if(user.perfil !=='Nivel 3' ) {%>
+              <input name="provincia" class="form-control" value="<%= destino.provincia %>" readonly>
+              <% } else { %>
+                <select name="provincia" class="form-control">
+                  <option value="<%= destino.provincia %>" selected>
+                    <%= destino.provincia %>
+                  </option>
+                  <option value="Buenos Aires">Buenos Aires</option>
+                  <option value="Catamarca">Catamarca</option>
+                  <option value="Chaco">Chaco</option>
+                  <option value="Chubut">Chubut</option>
+                  <option value="Cordoba">Cordoba</option>
+                  <option value="Corrientes">Corrientes</option>
+                  <option value="Entre Rios">Entre Rios</option>
+                  <option value="Formosa">Formosa</option>
+                  <option value="Jujuy">Jujuy</option>
+                  <option value="La Pampa">La Pampa</option>
+                  <option value="La Rioja">La Rioja</option>
+                  <option value="Mendoza">Mendoza</option>
+                  <option value="Misiones">Misiones</option>
+                  <option value="Neuquen">Neuquen</option>
+                  <option value="Rio Negro">Rio Negro</option>
+                  <option value="Salta">Salta</option>
+                  <option value="San Juan">San Juan</option>
+                  <option value="San Luis">San Luis</option>
+                  <option value="Santa Cruz">Santa Cruz</option>
+                  <option value="Santa Fe">Santa Fe</option>
+                  <option value="Santiago del Estero">Santiago del Estero</option>
+                  <option value="Tierra del Fuego">Tierra del Fuego</option>
+                  <option value="Tucuman">Tucuman</option>
+                </select>
+                <% } %>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="localidad">Localidad</label>
+            <% if(user.perfil !=='Administrador' ) {%>
+              <input type="text" class="form-control" name="localidad" value="<%= destino.localidad %>" readonly>
+              <% } else {%>
+                <input type="text" class="form-control" name="localidad" value="<%= destino.localidad %>">
+                <% } %>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-row">
+          <!-- PC1 -->
+          <div class="form-group col-md-4">
+            <label for="inputCity">Transporte</label>
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">PC1</span>
+              </div>
+              <select name="transportePC1" id="" class="form-control" required>
+                <option value="<%= destino.transportePC1 %>" selected>
+                  <%= destino.transportePC1 %>
+                </option>
+                <option value="BOLLORE">BOLLORE</option>
+                <option value="BUSPACK">BUSPACK (DHL)</option>
+                <option value="CORREO ARGENTINO">CORREO ARGENTINO</option>
+                <option value="DHL">DHL</option>
+                <option value="FONTANELA">FONTANELA</option>
+                <option value="BUSPACK">JETPACK (DHL)</option>
+                <option value="MOSTTO">MOSTTO</option>
+                <option value="OCA">OCA (DHL)</option>
+                <option value="OTI">OTI</option>
+                <option value="URBANO">URBANO</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputState">TT</label>
+            <select name="tiempoDeTransitoPC1" id="" class="form-control" required>
+              <option value="<%= destino.tiempoDeTransitoPC1 %>" selected>
+                <%= destino.tiempoDeTransitoPC1 %>
+              </option>
+              <option value="Same Day">Same Day</option>
+              <option value="D+1">D+1</option>
+              <option value="D+2">D+2</option>
+              <option value="D+3">D+3</option>
+              <option value="D+4">D+4</option>
+              <option value="D+5">D+5</option>
+              <option value="D+6">D+6</option>
+              <option value="D+7">D+7</option>
+              <option value="D+9">D+8</option>
+              <option value="D+9">D+9</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <label for="inputState">Transporte detalle</label>
+            <input type="text" class="form-control" name="transporteDetallePC1"
+              value="<%= destino.transporteDetallePC1 %>">
+          </div>
+
+          <!-- PC3 -->
+          <div class="form-group col-md-4">
+            <div class="input-group flex-nowrap">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="addon-wrapping">PC3</span>
+              </div>
+              <select name="transportePC3" id="" class="form-control" required>
+                <option value="<%= destino.transportePC3 %>" selected>
+                  <%= destino.transportePC3 %>
+                </option>
+                <option value="BOLLORE">BOLLORE</option>
+                <option value="BUSPACK">BUSPACK (DHL)</option>
+                <option value="CORREO ARGENTINO">CORREO ARGENTINO</option>
+                <option value="DHL">DHL</option>
+                <option value="FONTANELA">FONTANELA</option>
+                <option value="BUSPACK">JETPACK (DHL)</option>
+                <option value="MOSTTO">MOSTTO</option>
+                <option value="OCA">OCA (DHL)</option>
+                <option value="OTI">OTI</option>
+                <option value="URBANO">URBANO</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <select name="tiempoDeTransitoPC3" id="" class="form-control" required>
+              <option value="<%= destino.tiempoDeTransitoPC3 %>" selected>
+                <%= destino.tiempoDeTransitoPC3 %>
+              </option>
+
+              <option value="Same Day">Same Day</option>
+              <option value="D+1">D+1</option>
+              <option value="D+2">D+2</option>
+              <option value="D+3">D+3</option>
+              <option value="D+4">D+4</option>
+              <option value="D+5">D+5</option>
+              <option value="D+6">D+6</option>
+              <option value="D+7">D+7</option>
+              <option value="D+9">D+8</option>
+              <option value="D+9">D+9</option>
+            </select>
+          </div>
+          <div class="form-group col-md-5">
+            <input type="text" class="form-control" name="transporteDetallePC3"
+              value="<%= destino.transporteDetallePC3 %>">
+
+          </div>
+        </div>
+
+
+
+
+
+
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="cutoff">Cut-off:</label>
+            <select name="cutoff" id="" class="form-control">
+              <option value="<%= destino.cutoff %>" selected>
+                <%= destino.cutoff %>
+              </option>
+              <option value="00:00">00:00</option>
+              <option value="14:30">14:30</option>
+              <option value="16:00">16:00</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cutoff">Disponible desde:</label>
+            <select name="horarioDisponible" id="" class="form-control">
+              <option value="<%= destino.horarioDisponible %>" selected>
+                <%= destino.horarioDisponible %>
+              </option>
+              <option value="08:00">08:00</option>
+              <option value="09:00">09:00</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+            </select>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="form-group">
+          <label for="direccionDeRetiro">Direccion de retiro:</label>
+          <input type="text" class="form-control" value="<%= destino.direccionDeRetiro %>" name="direccionDeRetiro">
+        </div>
+
+
+
+
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="cutoff">Transporte retorno</label>
+            <select name="transporteRetorno" class="form-control">
+              <option value="<%= destino.transporteRetorno %>" selected>
+                <%= destino.transporteRetorno %>
+              </option>
+              <option value="BOLLORE">BOLLORE</option>
+              <option value="BUSPACK">BUSPACK</option>
+              <option value="CORREO ARGENTINO">CORREO ARGENTINO</option>
+              <option value="DHL">DHL</option>
+              <option value="OCA">OCA</option>
+              <option value="OTI">OTI</option>
+              <option value="URBANO">URBANO</option>
+              <option value="MOSTTO">MOSTTO</option>
+              <option value="FONTANELA">FONTANELA</option>
+            </select>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cutoff">Estado:</label>
+            <select name="estado" id="" class="form-control">
+              <% if(destino.estado=='Activo' ) { %>
+                <option value="Activo" selected>Activo</option>
+                <option value="Inactivo">Inactivo</option>
+                <% } else { %>
+                  <option value="Activo">Activo</option>
+                  <option value="Inactivo" selected>Inactivo</option>
+                  <% } %>
+            </select>
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+          <label for="guiasDeRetornoDetalle">Guias de retorno</label>
+          <small>(Ingresar 1 tecnico por linea)</small>
+          <textarea name="guiasDeRetornoDetalle" id="" cols="20" rows="3"
+            class="form-control"><%= destino.guiasDeRetornoDetalle %></textarea>
+        </div>
+
+
+        <div class="form-group">
+          <label for="comentarios">Comentarios:</label>
+          <textarea name="comentarios" id="" cols="20" rows="5"
+            class="form-control"><%= destino.comentarios %></textarea>
+        </div>
+
+
+
+        <!-- botoner -->
+        <div class="text-center">
+          <input type="submit" class="btn btn-success" value="Guardar">
+          <a href="/home" class="btn btn-outline-danger">X</a>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+
+  <%- include('_footer.ejs') %>

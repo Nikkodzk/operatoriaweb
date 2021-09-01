@@ -1,0 +1,98 @@
+<%- include('_header.ejs') %>
+
+  <div class="container">
+    <h1>Register</h1>
+
+
+    <div>
+      <form action="/register" method="POST" class="col-md-6 offset-md-3 p-4 mt-3">
+
+
+
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control nombre" placeholder="Nombre" name="nombre">
+            <input type="text" class="form-control" placeholder="Apellido" name="apellido">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="email" class="form-control" placeholder="email@email.com" name="email">
+        </div>
+
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="DNI" name="dni" minlength="7" maxlength="8">
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="estado">Estado</label>
+          </div>
+          <select name="estado" id="" class="form-control">
+            <option value="Habilitado" selected>Habilitado</option>
+            <option value="Dehabilitado">Dehabilitado</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div>
+            <label for="empresa">Empresa</label>
+          </div>
+          <select name="empresa" id="" class="form-control">
+            <option value="NCR Logistica" selected>NCR Logistica</option>
+            <option value="NCR control tower">NCR Control Tower</option>
+            <option value="NCR Account Support">NCR Account Support</option>
+            <option value="DHL SC">DHL SC</option>
+            <option value="DHL Express">DHL Express</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Username" name="username">
+            <input type="password" class="form-control" name="password" placeholder="Password" minlength="8">
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <div>
+            <label for="perfil">Perfil</label>
+          </div>
+          <select name="perfil" id="" class="form-control">
+            <option value="Nivel 1">Nivel 1 (visualizar)</option>
+            <option value="Nivel 2">Nivel 2 (editar)</option>
+            <option value="Nivel 3">Nivel 3 (administrar)</option>
+          </select>
+        </div>
+
+        <!-- botoner -->
+        <div class="text-center">
+          <input type="submit" class="btn btn-success" value="Registrar">
+          <a href="/usuarios" class="btn btn-outline-danger">X</a>
+        </div>
+
+      </form>
+    </div>
+
+
+    <script>
+      $(document).ready(() => {
+        $('input:first').focus();
+      });
+    </script>
+
+
+    <% if(message.length> 0 ) {%>
+      <div class="alert alert-warning alert-dismissible fade show col-md-4" role="alert">
+        <%= message %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <% } %>
+
+
+  </div>
+
+  <%- include('_footer.ejs') %>

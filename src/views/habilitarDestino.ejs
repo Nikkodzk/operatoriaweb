@@ -1,0 +1,301 @@
+<%- include('_header.ejs') %>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-success">
+        <span>
+            <a class="navbar-brand" href="">
+                <img src="/img/logo2.png" alt="..." width="25px">
+                Operatoria Web</a>
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+
+
+                <% if( user.perfil==='Nivel 3' || user.perfil==='Nivel 2' ){ %>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/gome">Destinos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/guiasDeRetorno">Guias de retorno</a>
+                    </li>
+
+                    <% } %>
+
+                        <% if( user.perfil=='Nivel 3' ) {%>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/usuarios">Usuarios</a>
+                            </li>
+                            <li class="nav-item">
+                                <u><a class="nav-link active" href="habilitarDestino">Habilitar destino<span
+                                            class="sr-only">(current)</span></a></u>
+
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/logs">Logs</a>
+                            </li>
+                            <% } %>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <span class="mx-3">
+                    <%= user.empresa %>
+                </span>
+                <span class="mx-3">@ <%= user.username %></span>
+                <a class="nav-link btn btn-danger" href="/salir">X</a>
+            </form>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+
+    <div class="container-fluid">
+
+
+        <div class="row mx-2">
+            <!-- MENSAJES -->
+            <% if(message.length> 0 ) {%>
+                <div class="alert alert-warning alert-dismissible fade show mt-2 mb-0" role="alert">
+                    <%= message %>
+                        <div class="text-center">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                </div>
+                <% } %>
+        </div>
+
+
+
+
+        <% if(destinos.length===0){ %>
+
+            <div class="m-auto py-3 text-center">
+                <h3>No hay destinos inhabilitados.</h3>
+            </div>
+
+            <% } else{ %>
+
+                <!-- BARRA BUSQUEDA -->
+                <div class="row mx-2">
+                    <div class="input-group my-3 mx-auto">
+                        <input type="text" class="form-control" placeholder="Buscar..." aria-label="Buscar..."
+                            aria-describedby="basic-addon2" id="buscar">
+                        <div class="input-group-append">
+                            <span class="input-group-text" id="">
+                                <a href="/addOperatoria" class="text-dark">+ AGREGAR</a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row mx-2">
+                    <!-- TABLE -->
+                    <table class="table table-sm table-hover">
+                        <thead class="table-info">
+                            <th>PROVINCIA</th>
+                            <th>LOCALIDAD</th>
+                            <th>CUT-OFF</th>
+                            <th>TRANSPORTE</th>
+                            <th>TT</th>
+                            <th>RETORNO</th>
+                            <th class="text-center">ACCIONES</th>
+                        </thead>
+                        <tbody id="myTable">
+
+                            <% destinos.forEach(e=> { %>
+
+                                <tr class="shadow-sm p-1">
+
+
+                                    <td class="align-middle">
+                                        <div>
+                                            <div>
+                                                <%= e.provincia %>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <%= e.localidad %>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <%= e.cutoff %>
+                                    </td>
+
+                                    <td class="align-middle">
+                                        <div>
+                                            <div>
+                                                <%= e.transporte %>
+                                            </div>
+                                            <small>
+                                                <%= e.transporteDetalle %>
+                                            </small>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle">
+                                        <%= e.tiempoDeTransito%>
+                                    </td>
+                                    <td class="align-middle">
+                                        <%= e.transporteRetorno %>
+                                    </td>
+                                    <!-- <td class="text-center"><small><a href="verOperatoria/<%=e._id%>">VER</a></small></td> -->
+                                    <td class="text-center align-middle">
+                                        <a href="editarOperatoria/<%= e.id %>"
+                                            class="btn btn-outline-success">habilitar</a>
+                                    </td>
+                                </tr>
+                                <% }) %>
+
+                                    <% } %>
+
+                        </tbody>
+                    </table>
+                </div>
+    </div>
+
+
+    <!-- MODAL -->
+
+
+    <% destinos.forEach(e=> { %>
+
+        <div class="modal fade" id="a<%= e.id %>" tabindex="-1" role="dialog" aria-labelledby="n1313"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <%= e.localidad %>
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-borderless">
+                            <tr>
+                                <td><b>Provincia:</b></td>
+                                <td>
+                                    <%= e.provincia %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Localidad:</b></td>
+                                <td>
+                                    <%= e.localidad %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Transporte:</b></td>
+                                <td>
+                                    <%= e.transporte %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Detalle de transporte:</b></td>
+                                <td>
+                                    <%= e.transporteDetalle %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Cut-off:</b></td>
+                                <td>
+                                    <%= e.cutoff %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>TT:</b></td>
+                                <td>
+                                    <%= e.tiempoDeTransito %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Horario Disponible:</b></td>
+                                <td>
+                                    <%= e.horarioDisponible %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Direccion para retiro:</b></td>
+                                <td>
+                                    <%= e.direccionDeRetiro %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Retorno:</b></td>
+                                <td>
+                                    <%= e.transporteRetorno %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Estado:</b></td>
+                                <% if(e.estado=='Inactivo' ) { %>
+                                    <td class="text-danger">
+                                        <%= e.estado %>
+                                    </td>
+                                    <% } else { %>
+                                        <td>
+                                            <%= e.estado %>
+                                        </td>
+                                        <% } %>
+                            </tr>
+                            <tr>
+                                <td><b>Activo desde:</b></td>
+                                <td>
+                                    <%= e.activoDesde.toLocaleDateString() %>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>Comentarios:</b></td>
+                                <td>
+                                    <%= e.comentarios %>
+                                </td>
+                            </tr>
+
+
+                        </table>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <% if(user.perfil=='Nivel 3' ) { %>
+                            <a class="btn btn-primary" href="/editaroperatoria/<%= e.id %>">Editar</a>
+                            <% } %>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <% }) %>
+            <!-- modal -->
+            <script>
+                $('#myModal').on('shown.bs.modal', function () {
+                    $('#myInput').trigger('focus');
+                })
+            </script>
+
+
+            <!-- barra busqeuda -->
+            <script>
+                $(document).ready(function () {
+                    $("#buscar").on("keyup", function () {
+                        var value = $(this).val().toLowerCase();
+                        $("#myTable tr").filter(function () {
+                            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                        });
+                    });
+                });
+            </script>
+
+            <%- include('_footer.ejs') %>
