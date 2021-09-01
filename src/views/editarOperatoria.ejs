@@ -234,15 +234,19 @@
           </div>
           <div class="form-group col-md-6">
             <label for="cutoff">Estado:</label>
-            <select name="estado" id="" class="form-control">
-              <% if(destino.estado=='Activo' ) { %>
-                <option value="Activo" selected>Activo</option>
-                <option value="Inactivo">Inactivo</option>
+            <% if(user.perfil !=='Nivel 3' ) {%>
+              <select name="estado" id="" class="form-control" disabled>
                 <% } else { %>
-                  <option value="Activo">Activo</option>
-                  <option value="Inactivo" selected>Inactivo</option>
-                  <% } %>
-            </select>
+                  <select name="estado" id="" class="form-control">
+                    <% } %>
+                      <% if(destino.estado=='Activo' ) { %>
+                        <option value="Activo" selected>Activo</option>
+                        <option value="Inactivo">Inactivo</option>
+                        <% } else { %>
+                          <option value="Activo">Activo</option>
+                          <option value="Inactivo" selected>Inactivo</option>
+                          <% } %>
+                  </select>
           </div>
 
         </div>
