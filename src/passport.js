@@ -24,29 +24,7 @@ passport.deserializeUser(async (id, done) => {
 
 
 
-
-
-
-// ------------------------------------------------------------------- estrategia inicio sesion NUEVO
-/* passport.use('inicio.sesion', new localStrategy({
-  usernameField: 'username',
-  passwordField: 'password',
-  passReqToCallback: true
-}, async (req, username, password, done) => {
-  const rows = await pool.query('SELECT * FROM usuarios WHERE username = ?', [username]);
-  if (rows.length > 0) {
-    const user = rows[0];
-    const validPassword = await bcrypt.compareSync(password, user.password)
-    if (validPassword) {
-      
-      done(null, user);
-    } else {
-      done(null, false, req.flash('info', 'La contraseña es incorrecta'));
-    }
-  } else {
-    return done(null, false, req.flash('info', 'El usuario no está registrado'));
-  }
-})); */
+// --------------------------------------------------------------------------- inicio sesion
 
 passport.use('inicio.sesion', new localStrategy({
   usernameField: 'username',
@@ -92,7 +70,7 @@ passport.use('inicio.sesion', new localStrategy({
 
 
 
-// ------------------------------------------------------------------- estrategia registro NUEVO
+// -------------------------------------------------------------------  registro NUEVO
 passport.use('register', new localStrategy({
   usernameField: 'username',
   passwordField: 'password',
@@ -100,6 +78,7 @@ passport.use('register', new localStrategy({
 }, async (req, username, password, done) => {
 
   let newUser = req.body
+  newUser.alta = new Date();
   newUser.password = await bcrypt.hashSync( newUser.password, bcrypt.genSaltSync(10));
   // Saving in the Database
   const result = await pool.query('INSERT INTO usuarios SET ? ', newUser);
