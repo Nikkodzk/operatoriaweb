@@ -213,31 +213,54 @@
         </div>
 
 
+
         <div class="form-row">
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-4">
             <label for="cutoff">Transporte retorno</label>
-            <select name="transporteRetorno" class="form-control" required>
-              <option value="" disabled selected>(Seleccione)</option>
+            <select name="transporteRetorno" class="form-control">
+              <option value="" selected disabled>(Seleccione)</option>
               <option value="BOLLORE">BOLLORE</option>
               <option value="BUSPACK">BUSPACK (DHL)</option>
               <option value="CORREO ARGENTINO">CORREO ARGENTINO</option>
               <option value="DHL">DHL</option>
-              <option value="FONTANELA">FONTANELA</option>
-              <option value="BUSPACK">JETPACK (DHL)</option>
-              <option value="MOSTTO">MOSTTO</option>
+              <option value="JETPACK">JETPACK (DHL)</option>
               <option value="OCA">OCA (DHL)</option>
               <option value="OTI">OTI</option>
               <option value="URBANO">URBANO</option>
+              <option value="MOSTTO">MOSTTO</option>
+              <option value="FONTANELA">FONTANELA</option>
             </select>
           </div>
-          <div class="form-group col-md-6">
+
+          <div class="form-group col-md-4">
+            <label for="cutoff">Retorno TT</label>
+            <select name="retornoTT" class="form-control" required>
+              <option value="" selected disabled>(Seleccione)</option>
+              <option value="Same Day">Same Day</option>
+              <option value="D+1">D+1</option>
+              <option value="D+2">D+2</option>
+              <option value="D+3">D+3</option>
+              <option value="D+4">D+4</option>
+              <option value="D+5">D+5</option>
+              <option value="D+6">D+6</option>
+              <option value="D+7">D+7</option>
+              <option value=">D+7">>D+7</option>
+            </select>
+          </div>
+
+          <div class="form-group col-md-4">
             <label for="cutoff">Estado:</label>
-            <select name="estado" id="" class="form-control" required>
+            <select name="estado" id="" class="form-control">
               <option value="Activo" selected>Activo</option>
               <option value="Inactivo">Inactivo</option>
             </select>
           </div>
+
         </div>
+
+
+
 
         <div class="form-group">
           <label for="guiasDeRetornoDetalle">Guias de retorno</label>

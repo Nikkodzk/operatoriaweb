@@ -63,7 +63,7 @@
     <div class="container-fluid">
 
 
-        <div class="row mx-2">
+        <div class="row my-2">
             <!-- MENSAJES -->
             <% if(message.length> 0 ) {%>
                 <div class="alert alert-warning alert-dismissible fade show mt-2 mb-0" role="alert">
@@ -79,20 +79,17 @@
 
 
         <!-- BARRA BUSQUEDA -->
-        <div class="mx-2">
+        <div class="">
 
             <% if( user.perfil==='Nivel 3' ) { %>
                 <script>
                     const btnAgregar = 1;
                 </script>
-                <!-- <div class="text-right m-2">
-                    <a href="/addOperatoria" class="text-dark"><span class="btn btn-info">+ AGREGAR</span></a>
-                </div> -->
                 <% } %>
 
         </div>
 
-        <div class="m-2">
+        <div class="my-2">
             <!-- TABLE -->
             <table class="table table-sm table-hover" id="tablaDestinos">
                 <thead class="table-info">
@@ -100,7 +97,7 @@
                     <th>LOCALIDAD</th>
                     <th>CUT-OFF</th>
                     <th>TRANSPORTE (PC1)</th>
-                    <th>TT</th>
+                    <th>CUTOFF</th>
                     <th>RETORNO</th>
                     <th class="text-center">ACCIONES</th>
                 </thead>
@@ -131,15 +128,20 @@
                                         <%= e.transportePC1 %>
                                     </div>
                                     <small>
-                                        <%= e.transporteDetallePC1%>
+                                        <%= e.tiempoDeTransitoPC1%>
                                     </small>
                                 </div>
                             </td>
                             <td class="align-middle">
-                                <%= e.tiempoDeTransitoPC1 %>
+                                <%= e.cutoff %>
                             </td>
                             <td class="align-middle">
-                                <%= e.transporteRetorno %>
+                                <div>
+                                    <%= e.transporteRetorno %>
+                                </div>
+                                <small>
+                                    <%= e.retornoTT %>
+                                </small>
                             </td>
                             <!-- <td class="text-center"><small><a href="verOperatoria/<%=e._id%>">VER</a></small></td> -->
                             <td class="text-center align-middle">
@@ -227,6 +229,12 @@
                             <div class="col-4"><b>Retorno:</b></div>
                             <div class="col-8">
                                 <%= e.transporteRetorno %>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4"><b>Retorno TT:</b></div>
+                            <div class="col-8">
+                                <%= e.retornoTT %>
                             </div>
                         </div>
 
