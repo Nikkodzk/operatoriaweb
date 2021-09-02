@@ -2,21 +2,21 @@ const mysql = require('mysql');
 
 const { promisify }= require('util');
 
-// const database = {
-//   connectionLimit: 5,
-//   host: 'blohtopopjwq2buo0ymr-mysql.services.clever-cloud.com',
-//   user: 'u7xc3gs6bzbzchkc',
-//   password: 'pW7k16FqwwWJjWKF0RbB',
-//   database: 'blohtopopjwq2buo0ymr'
-// }
-
 const database = {
-  connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'operatoriaweb'
+  connectionLimit: 5,
+  host: 'blohtopopjwq2buo0ymr-mysql.services.clever-cloud.com',
+  user: 'u7xc3gs6bzbzchkc',
+  password: 'pW7k16FqwwWJjWKF0RbB',
+  database: 'blohtopopjwq2buo0ymr'
 }
+
+// const database = {
+//   connectionLimit: 10,
+//   host: 'localhost',
+//   user: 'root',
+//   password: '',
+//   database: 'operatoriaweb'
+// }
 
 const pool = mysql.createPool(database);
 
