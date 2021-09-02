@@ -1,3 +1,6 @@
+-- Database source: https://api.clever-cloud.com/v2/session/login 
+
+
 -- CREACION TABLA USUARIOS
 CREATE TABLE `blohtopopjwq2buo0ymr`.`usuarios` ( 
   `id` INT NOT NULL AUTO_INCREMENT , 
@@ -36,3 +39,8 @@ CREATE TABLE `blohtopopjwq2buo0ymr`.`destinos` (
    `activoDesde` DATE NOT NULL , 
    PRIMARY KEY (`id`)) 
    ENGINE = InnoDB;
+
+
+
+  --  INSERT
+  INSERT INTO `usuarios` (`id`, `nombre`, `apellido`, `email`, `dni`, `estado`, `perfil`, `username`, `password`, `empresa`, `alta`) VALUES (NULL, '', '', '', '', '', '', '', '', '', '')
