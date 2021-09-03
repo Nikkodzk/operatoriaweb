@@ -22,7 +22,7 @@
           <form action="/login" method="POST" class="text-center">
 
             <div class="form-group">
-              <input type="text" name="username" placeholder="Usuario" class="form-control">
+              <input type="text" name="username" placeholder="Usuario" class="form-control" id="username">
             </div>
 
             <div class="form-group">
@@ -53,6 +53,12 @@
 
 
   </div>
-  </div>
+
+  <script>
+
+    $(document).ready(() => {
+      $('#username').focus();
+    });
+  </script>
 
   <%- include('_footer.ejs') %>
