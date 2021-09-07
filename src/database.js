@@ -10,15 +10,17 @@ const database = {
   database: 'blohtopopjwq2buo0ymr'
 }
 
-// const database = {
-//   connectionLimit: 10,
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'operatoriaweb'
-// }
+const databaseLocal = {
+  connectionLimit: 10,
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'operatoriaweb'
+}
 
 const pool = mysql.createPool(database);
+// const pool = mysql.createPool(databaseLocal);
+
 
 pool.getConnection((err, connection) => {
   if (err) {
