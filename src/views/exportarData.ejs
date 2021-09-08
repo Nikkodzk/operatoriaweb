@@ -1,0 +1,178 @@
+<%- include('_header.ejs') %>
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="card mx-auto shadow-sm mt-3">
+                <!-- <img src="..." class="card-img-top" alt="..."> -->
+                <div class="card-body">
+                    <div class="spinner-border text-info mb-2" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <h4 class="card-title" id="titulo">Descargando</h4>
+                    <p class="card-text">La descarga comenzará automáticamente en unos segundos. </p>
+                    <hr>
+                    <p>Espera unos segundos para volver al listado.</p>
+                    <a href="/home" class="btn btn-primary mx-auto">Volver al listado</a>
+                </div>
+            </div>
+        </div>
+
+        <table class="table d-none" id="ocho">
+            <thead>
+                <th>Provincia</th>
+                <th>Localidad</th>
+                <th>transportePC1</th>
+                <th>transporteDetallePC1</th>
+                <th>tiempoDeTransitoPC1</th>
+                <th>transportePC3</th>
+                <th>transporteDetallePC3</th>
+                <th>tiempoDeTransitoPC3</th>
+                <th>transporteRetorno</th>
+                <th>retornoTT</th>
+                <th>guiasDeRetornoDetalle</th>
+                <th>cutoff</th>
+                <th>horarioDisponible</th>
+                <th>direccionDeRetiro</th>
+                <th>comentarios</th>
+                <th>Estado</th>
+            </thead>
+            <tbody>
+                <% destinos.forEach( destino=> { %>
+
+                    <tr>
+                        <td>
+                            <%= destino.provincia %>
+                        </td>
+                        <td>
+                            <%= destino.localidad %>
+                        </td>
+                        <td>
+                            <%= destino.transportePC1%>
+                        </td>
+                        <td>
+                            <%= destino.transporteDetallePC1 %>
+                        </td>
+                        <td>
+                            <%= destino.tiempoDeTransitoPC1 %>
+                        </td>
+                        <td>
+                            <%= destino.transportePC3 %>
+                        </td>
+                        <td>
+                            <%= destino.transporteDetallePC3 %>
+                        </td>
+                        <td>
+                            <%= destino.tiempoDeTransitoPC3 %>
+                        </td>
+                        <td>
+                            <%= destino.transporteRetorno %>
+                        </td>
+                        <td>
+                            <%= destino.retornoTT %>
+                        </td>
+                        <td>
+                            <%= destino.guiasDeRetornoDetalle %>
+                        </td>
+                        <td>
+                            <%= destino.cutoff %>
+                        </td>
+                        <td>
+                            <%= destino.horarioDisponible%>
+                        </td>
+                        <td>
+                            <%= destino.direccionDeRetiro %>
+                        </td>
+                        <td>
+                            <%= destino.comentarios %>
+                        </td>
+                        <td>
+                            <%= destino.estado %>
+                        </td>
+                    </tr>
+
+                    <% }) %>
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+
+
+
+    <script>
+        function exportTableToExcel(filename = '') {
+
+            let downloadLink;
+            const dataType = 'application/vnd.ms-excel';
+            const tableSelect = document.getElementById('ocho'); // nombre de la tabla
+            const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = 'destinos' + '.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                let blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            }
+            else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+        }
+
+
+
+        $(document).ready(() => {
+
+            let downloadLink;
+            const dataType = 'application/vnd.ms-excel';
+            const tableSelect = document.getElementById('ocho'); // nombre de la tabla
+            const tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            const filename = 'destinos' + '.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                let blob = new Blob(['\ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            }
+            else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+
+
+        });
+
+    </script>
+
+    <%- include('_footer.ejs') %>

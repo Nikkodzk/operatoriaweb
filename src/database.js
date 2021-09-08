@@ -18,8 +18,8 @@ const databaseLocal = {
   database: 'operatoriaweb'
 }
 
-const pool = mysql.createPool(database);
-// const pool = mysql.createPool(databaseLocal);
+// const pool = mysql.createPool(database);
+const pool = mysql.createPool(databaseLocal);
 
 
 pool.getConnection((err, connection) => {

@@ -16,10 +16,25 @@
             <ul class="navbar-nav mr-auto">
 
 
-                <% if( user.perfil==='Nivel 3' || user.perfil==='Nivel 2' ){ %>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/home">Destinos</a>
+                <% if( user.perfil !=='Nivel 1' ){ %>
+
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link  dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Destinos <span class="sr-only">(current)</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/home">Listado</a>
+                            <a class="dropdown-item" href="/guiasDeRetorno">Guias de retorno</a>
+                            <a class="dropdown-item" href="/exportarData">Exportar</a>
+                            <% if(user.perfil==='Nivel 3' ) { %>
+                                <a class="dropdown-item" href="/addOperatoria">Nuevo destino</a>
+                                <a class="dropdown-item" href="/habilitarDestino">Habilitar destino</a>
+                                <% } %>
+                        </div>
                     </li>
+
                     <li class="nav-item">
                         <a class="nav-link" href="/guiasDeRetorno">Guias de retorno</a>
                     </li>
@@ -34,9 +49,9 @@
                                 <a class="nav-link" href="/habilitarDestino">Habilitar destino</a>
                             </li>
                             <li class="nav-item">
-                                <u><a class="nav-link active" href="#">Logs<span
-                                            class="sr-only">(current)</span></a></u>
+                                <a class="nav-link active" href="/logs">Logs</a>
                             </li>
+
                             <% } %>
 
 

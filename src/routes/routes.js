@@ -330,6 +330,30 @@ router.get("/guiasDeRetorno", isAuthenticated , async (req, res, next) => {
 });
 
 
+// ------------------------------------------------------------------------------- EXPORTAR DATA
+
+
+router.get("/exportarData", isAuthenticated , async (req, res, next) => {
+
+  await pool.getConnection((err, connection) =>{
+    if(err) console.log(err);
+    else{
+      connection.query = promisify(connection.query);
+      connection.query("SELECT * FROM `destinos` ", (error, resultados) => {
+        if(error) console.log(error);
+        else{
+          const destinos = resultados;
+          connection.release();
+          res.render("exportarData", { 
+            message: req.flash("info"),
+            user: req.user || null,
+            destinos
+          });
+        }
+      });
+    }
+  });
+});
 
 
 // ------------------------------------------------------------------------------- LOGS
